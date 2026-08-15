@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Button, HStack, Menu, Portal, Text } from "@chakra-ui/react";
-import { PanelLeft, LogOut, User, KeyRound } from "lucide-react";
+import { PanelLeft, LogOut, User } from "lucide-react";
 import type { MenuSelectionDetails } from "@chakra-ui/react";
 import { ColorModeButton } from "@/components/ui/color-mode";
 import { useAuth } from "@/contexts/AuthContext";
 import AvatarNav from "./AvatarNav";
 import Profile from "./Profile";
-import Password from "./Password";
+// import Password from "./Password";
 
 interface NavBarProps {
   onToggleSidebar: () => void;
@@ -53,10 +53,10 @@ const NavBar = ({ onToggleSidebar, title }: NavBarProps) => {
                   <User size={16} />
                   Profile
                 </Menu.Item>
-                <Menu.Item value="password" fontWeight="medium">
+                {/* <Menu.Item value="password" fontWeight="medium">
                   <KeyRound size={16} />
                   Change Password
-                </Menu.Item>
+                </Menu.Item> */}
                 <Menu.Item value="logout" color="red.500" fontWeight="medium">
                   <LogOut size={16} />
                   Logout
@@ -67,8 +67,14 @@ const NavBar = ({ onToggleSidebar, title }: NavBarProps) => {
         </Menu.Root>
       </HStack>
 
-      <Profile isOpen={openDrawer === "profile"} onClose={() => setOpenDrawer(null)} />
-      <Password isOpen={openDrawer === "password"} onClose={() => setOpenDrawer(null)} />
+      <Profile
+        isOpen={openDrawer === "profile"}
+        onClose={() => setOpenDrawer(null)}
+      />
+      {/* <Password
+        isOpen={openDrawer === "password"}
+        onClose={() => setOpenDrawer(null)}
+      /> */}
     </HStack>
   );
 };

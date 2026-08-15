@@ -46,27 +46,27 @@ export const login = async (credentials: LoginCredentials) => {
 // Mirrors the real /login/ response shape so the rest of the auth flow
 // (token storage, redirect, protected routes) runs unchanged.
 // Remove this and switch Login.tsx back to `login()` once CORS is live.
-export const mockLogin = async (credentials: LoginCredentials) => {
-  const fakePayload = btoa(
-    JSON.stringify({ exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 }),
-  );
-  const access_token = `mock.${fakePayload}.token`;
-  const refresh_token = `mock-refresh-token`;
-  const user: AdminUser = {
-    id: 1,
-    email: credentials.email,
-    role: "admin",
-    first_name: "Admin",
-    last_name: "User",
-    securityCode: 447189,
-  };
+// export const mockLogin = async (credentials: LoginCredentials) => {
+//   const fakePayload = btoa(
+//     JSON.stringify({ exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 }),
+//   );
+//   const access_token = `mock.${fakePayload}.token`;
+//   const refresh_token = `mock-refresh-token`;
+//   const user: AdminUser = {
+//     id: 1,
+//     email: credentials.email,
+//     role: "admin",
+//     first_name: "Admin",
+//     last_name: "User",
+//     securityCode: 447189,
+//   };
 
-  localStorage.setItem("accessToken", access_token);
-  localStorage.setItem("refreshToken", refresh_token);
-  localStorage.setItem("userData", JSON.stringify(user));
+//   localStorage.setItem("accessToken", access_token);
+//   localStorage.setItem("refreshToken", refresh_token);
+//   localStorage.setItem("userData", JSON.stringify(user));
 
-  return { accessToken: access_token, refreshToken: refresh_token, user };
-};
+//   return { accessToken: access_token, refreshToken: refresh_token, user };
+// };
 //
 
 export const logout = () => {

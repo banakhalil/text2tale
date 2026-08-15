@@ -52,6 +52,19 @@ body {
   color: rgb(239, 236, 236);
 }
 
+/* Content panels */
+.card,
+.drawer {
+  /* background-color: rgb(245, 244, 244); */
+background-color: rgb(255, 254, 254);
+/* background-color: rgb(251, 249, 249); */
+}
+:root[class~="dark"] .card,
+:root[class~="dark"] .drawer {
+  /* background-color: #2d2c2c; */
+  background-color: #252525;
+}
+
 /* Custom Scrollbar */
 .drawer::-webkit-scrollbar {
   width: 6px;

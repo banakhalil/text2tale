@@ -14,8 +14,8 @@ import {
 import { Eye, EyeOff } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 // TEMP: real request bypassed until backend CORS is deployed — see authService.ts
-// import { login } from "@/services/authService";
-import { mockLogin as login } from "@/services/authService";
+import { login } from "@/services/authService";
+// import { mockLogin as login } from "@/services/authService";
 import { toaster } from "@/components/ui/toaster";
 import studyBg from "@/assets/study1.jpg";
 
