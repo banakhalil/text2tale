@@ -49,6 +49,7 @@ const CreateSubject = ({ isOpen, onClose }: Props) => {
       open={isOpen}
       onOpenChange={(details) => !details.open && onClose()}
       initialFocusEl={() => nameRef.current}
+      placement="center"
     >
       <Portal>
         <Dialog.Backdrop />

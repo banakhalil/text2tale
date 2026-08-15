@@ -139,6 +139,8 @@ const Profile = ({ isOpen, onClose }: Props) => {
                         width="120px"
                         height="120px"
                         alignSelf="center"
+                        bg="gray.300"
+                        _dark={{ bg: "gray.700" }}
                       >
                         <Avatar.Fallback
                           name={

@@ -41,12 +41,16 @@ export const useAddSubject = () => {
   });
 };
 
-export const useDisableSubject = () => {
+// NOTE: still named "delete" on the backend, but it's actually a status
+// toggle — pass is_active: true to re-enable, false to disable.
+export const useToggleSubjectStatus = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (id: number) => {
-      await axiosInstance.delete(`/subjects/${id}/delete/`);
+    mutationFn: async ({ id, isActive }: { id: number; isActive: boolean }) => {
+      await axiosInstance.delete(`/subjects/${id}/delete/`, {
+        data: { is_active: isActive },
+      });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["subjects"] });

@@ -12,7 +12,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { Plus } from "lucide-react";
-import { useDisableSubject, useSubjects, type Subject } from "@/hooks/useSubjects";
+import { useToggleSubjectStatus, useSubjects, type Subject } from "@/hooks/useSubjects";
 import { getSubjectIcon } from "@/lib/subjectIcons";
 import CreateSubject from "@/components/Subjects/CreateSubject";
 import { toaster } from "@/components/ui/toaster";
@@ -20,24 +20,37 @@ import { toaster } from "@/components/ui/toaster";
 const CARD_HEIGHT = "160px";
 
 const SubjectCard = ({ subject }: { subject: Subject }) => {
-  const Icon = getSubjectIcon(subject.name);
-  const disableSubject = useDisableSubject();
+  const Icon = getSubjectIcon(subject.id);
+  const toggleStatus = useToggleSubjectStatus();
 
-  const handleDisable = () => {
-    disableSubject.mutate(subject.id, {
-      onError: (error) => {
-        toaster.create({
-          title: "Error",
-          description:
-            error instanceof AxiosError
-              ? (error.response?.data?.message ?? "Failed to disable subject")
-              : "Failed to disable subject",
-          type: "error",
-          duration: 5000,
-          closable: true,
-        });
+  const handleToggle = () => {
+    const nextStatus = !subject.is_active;
+    toggleStatus.mutate(
+      { id: subject.id, isActive: nextStatus },
+      {
+        onSuccess: () => {
+          toaster.create({
+            title: nextStatus ? "Subject enabled" : "Subject disabled",
+            type: "success",
+            duration: 3000,
+            closable: true,
+          });
+        },
+        onError: (error) => {
+          toaster.create({
+            title: "Error",
+            description:
+              error instanceof AxiosError
+                ? (error.response?.data?.message ??
+                  `Failed to ${nextStatus ? "enable" : "disable"} subject`)
+                : `Failed to ${nextStatus ? "enable" : "disable"} subject`,
+            type: "error",
+            duration: 5000,
+            closable: true,
+          });
+        },
       },
-    });
+    );
   };
 
   return (
@@ -51,28 +64,34 @@ const SubjectCard = ({ subject }: { subject: Subject }) => {
       alignItems="center"
       justifyContent="center"
       gap={3}
-      opacity={subject.is_active ? 1 : 0.5}
-      filter={subject.is_active ? undefined : "grayscale(1)"}
     >
-      <Icon size={36} />
-      <Text fontWeight="medium" textAlign="center">
-        {subject.name}
-      </Text>
-      {subject.is_active ? (
-        <Button
-          size="2xs"
-          variant="outline"
-          colorPalette="red"
-          loading={disableSubject.isPending}
-          onClick={handleDisable}
-        >
-          Disable
-        </Button>
-      ) : (
-        <Button size="2xs" variant="outline" disabled>
-          Enable (coming soon)
-        </Button>
-      )}
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        gap={3}
+        opacity={subject.is_active ? 1 : 0.5}
+        filter={subject.is_active ? undefined : "grayscale(1)"}
+      >
+        <Icon size={36} />
+        <Text fontWeight="medium" textAlign="center">
+          {subject.name}
+        </Text>
+      </Box>
+      <Button
+        size="2xs"
+        variant="outline"
+        colorPalette={subject.is_active ? "red" : "green"}
+        loading={toggleStatus.isPending}
+        onClick={handleToggle}
+        _hover={
+          subject.is_active
+            ? undefined
+            : { bg: "green.50", color: "green.700", _dark: { bg: "green.900", color: "green.200" } }
+        }
+      >
+        {subject.is_active ? "Disable" : "Enable"}
+      </Button>
     </Card.Root>
   );
 };
