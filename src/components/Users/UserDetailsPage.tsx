@@ -22,6 +22,7 @@ import { useUserDetails, useToggleUserStatus, type AppUser } from "@/hooks/useUs
 import { useSubjects } from "@/hooks/useSubjects";
 import ExpandableText from "@/components/ExpandableText";
 import { toaster } from "@/components/ui/toaster";
+import { getStarColor } from "@/lib/starColors";
 
 interface Props {
   user: AppUser;
@@ -98,38 +99,40 @@ const UserDetailsPage = ({ user, onBack }: Props) => {
         </Text>
       </HStack>
 
-      <HStack gap={8} mb={6} align="center">
-        <Avatar.Root width="100px" height="100px" bg="gray.300" _dark={{ bg: "gray.700" }}>
-          <Avatar.Fallback name={fullName} fontSize="2xl" />
-          {user.profile_image && <Avatar.Image src={user.profile_image} />}
-        </Avatar.Root>
-        <VStack align="start" gap={1}>
-          <Text fontWeight="bold" fontSize="lg">
-            {fullName}
-          </Text>
-          <Text fontSize="sm" color="gray.500">
-            {user.email}
-          </Text>
-          <HStack gap={3}>
-            {isActive ? (
-              <Badge colorPalette="green">Active</Badge>
-            ) : (
-              <Badge bg="yellow.50" color="yellow.700" _dark={{ bg: "yellow.950", color: "yellow.200" }}>
-                Inactive
-              </Badge>
-            )}
-            <Button
-              size="xs"
-              colorPalette={isActive ? "red" : "green"}
-              variant="subtle"
-              loading={toggleStatus.isPending}
-              onClick={handleToggleStatus}
-            >
-              {isActive ? "Deactivate" : "Activate"}
-            </Button>
-          </HStack>
-        </VStack>
-      </HStack>
+      <Box className="card" borderRadius="xl" p={4} mb={6}>
+        <HStack gap={8} align="center">
+          <Avatar.Root width="100px" height="100px" bg="gray.300" _dark={{ bg: "gray.700" }}>
+            <Avatar.Fallback name={fullName} fontSize="2xl" />
+            {user.profile_image && <Avatar.Image src={user.profile_image} />}
+          </Avatar.Root>
+          <VStack align="start" gap={1}>
+            <Text fontWeight="bold" fontSize="lg">
+              {fullName}
+            </Text>
+            <Text fontSize="md" color="gray.500">
+              {user.email}
+            </Text>
+            <HStack gap={3}>
+              {isActive ? (
+                <Badge fontSize="sm" colorPalette="green">Active</Badge>
+              ) : (
+                <Badge fontSize="sm" bg="yellow.50" color="yellow.700" _dark={{ bg: "yellow.950", color: "yellow.200" }}>
+                  Inactive
+                </Badge>
+              )}
+              <Button
+                size="sm"
+                colorPalette={isActive ? "red" : "green"}
+                variant="plain"
+                loading={toggleStatus.isPending}
+                onClick={handleToggleStatus}
+              >
+                {isActive ? "Deactivate" : "Activate"}
+              </Button>
+            </HStack>
+          </VStack>
+        </HStack>
+      </Box>
 
       <HStack justify="space-between" mb={4}>
         <Text fontWeight="semibold" fontSize="lg">
@@ -137,12 +140,7 @@ const UserDetailsPage = ({ user, onBack }: Props) => {
         </Text>
         <Menu.Root onSelect={(d) => setSubjectId(d.value)}>
           <Menu.Trigger asChild>
-            <Button
-              variant="outline"
-              size="sm"
-              borderColor="gray.400"
-              _dark={{ borderColor: "gray.600" }}
-            >
+            <Button variant="outline" size="sm" className="color-teal-subtle">
               <HiSortAscending /> {selectedLabel}
             </Button>
           </Menu.Trigger>
@@ -178,13 +176,15 @@ const UserDetailsPage = ({ user, onBack }: Props) => {
             <GridItem key={lesson.id}>
               <Box className="card" borderRadius="xl" p={4} height="full">
                 <HStack justify="space-between" mb={2}>
-                  <Badge colorPalette="blue">{lesson.subject_name}</Badge>
-                  <Text fontSize="xs" color="gray.500">
+                  <Badge fontSize="sm" bg="blue.50" color="blue.700" _dark={{ bg: "blue.950", color: "blue.200" }}>
+                    {lesson.subject_name}
+                  </Badge>
+                  <Text fontSize="sm" color="gray.500">
                     {new Date(lesson.created_at).toLocaleDateString()}
                   </Text>
                 </HStack>
                 <ExpandableText text={lesson.content} lines={3} />
-                <Text fontSize="xs" color="gray.500" mt={2}>
+                <Text fontSize="sm" color="gray.500" mt={2}>
                   {lesson.total_stories} stories generated
                 </Text>
 
@@ -192,7 +192,7 @@ const UserDetailsPage = ({ user, onBack }: Props) => {
                   {lesson.first_story ? (
                     <>
                       <HStack justify="space-between" mb={1}>
-                        <Text fontWeight="medium" fontSize="sm">
+                        <Text fontWeight="medium" fontSize="md" dir="rtl">
                           {lesson.first_story.title}
                         </Text>
                         <HStack gap={0}>
@@ -200,7 +200,7 @@ const UserDetailsPage = ({ user, onBack }: Props) => {
                             <FaStar
                               key={i}
                               size={12}
-                              color={i < lesson.first_story!.initial_rating ? "rgb(255,192,0)" : "#d1d5db"}
+                              color={getStarColor(i, lesson.first_story!.initial_rating)}
                             />
                           ))}
                         </HStack>

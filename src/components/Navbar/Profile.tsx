@@ -168,6 +168,7 @@ const Profile = ({ isOpen, onClose }: Props) => {
                           type="button"
                           variant="ghost"
                           size="sm"
+                          className="color-lavender-outline"
                           onClick={() => fileInputRef.current?.click()}
                         >
                           <HiUpload /> Change Avatar
@@ -212,6 +213,7 @@ const Profile = ({ isOpen, onClose }: Props) => {
 
                     <Button
                       type="submit"
+                      className="color-lavender-solid"
                       my={6}
                       loading={updateProfile.isPending}
                     >

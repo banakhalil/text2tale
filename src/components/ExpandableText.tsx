@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import { Box, Button, Text } from "@chakra-ui/react";
 
 interface Props {
@@ -8,11 +8,23 @@ interface Props {
 
 const ExpandableText = ({ text, lines = 3 }: Props) => {
   const [expanded, setExpanded] = useState(false);
+  const [isOverflowing, setIsOverflowing] = useState(false);
+  const textRef = useRef<HTMLParagraphElement>(null);
+
+  useLayoutEffect(() => {
+    const el = textRef.current;
+    if (el) {
+      setIsOverflowing(el.scrollHeight > el.clientHeight + 1);
+    }
+  }, [text, lines]);
 
   return (
     <Box>
       <Text
-        fontSize="sm"
+        ref={textRef}
+        dir="rtl"
+        textAlign="right"
+        fontSize="md"
         whiteSpace="pre-wrap"
         overflow="hidden"
         display={expanded ? "block" : "-webkit-box"}
@@ -24,14 +36,17 @@ const ExpandableText = ({ text, lines = 3 }: Props) => {
       >
         {text}
       </Text>
-      <Button
-        size="2xs"
-        variant="ghost"
-        px={0}
-        onClick={() => setExpanded((v) => !v)}
-      >
-        {expanded ? "Show less" : "Show more"}
-      </Button>
+      {isOverflowing && (
+        <Button
+          size="sm"
+          fontSize="sm"
+          variant="ghost"
+          px={0}
+          onClick={() => setExpanded((v) => !v)}
+        >
+          {expanded ? "Show less" : "Show more"}
+        </Button>
+      )}
     </Box>
   );
 };

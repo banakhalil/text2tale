@@ -19,11 +19,11 @@ const UserCard = ({ user, onClick }: Props) => {
       borderWidth={2}
       borderColor="transparent"
       transition="all 0.2s ease"
-      _hover={{ borderColor: "#164b9a", transform: "translateY(-1px)", shadow: "lg" }}
+      _hover={{ borderColor: "#3b82f6", transform: "translateY(-1px)", shadow: "lg" }}
       onClick={onClick}
     >
       {user.is_active ? (
-        <Badge position="absolute" top={2} right={2} colorPalette="green">
+        <Badge position="absolute" top={2} right={2} fontSize="xs" colorPalette="green">
           Active
         </Badge>
       ) : (
@@ -31,6 +31,7 @@ const UserCard = ({ user, onClick }: Props) => {
           position="absolute"
           top={2}
           right={2}
+          fontSize="xs"
           bg="yellow.50"
           color="yellow.700"
           _dark={{ bg: "yellow.950", color: "yellow.200" }}
@@ -44,7 +45,7 @@ const UserCard = ({ user, onClick }: Props) => {
           {user.profile_image && <Avatar.Image src={user.profile_image} />}
         </Avatar.Root>
         <VStack gap={0}>
-          <Text fontWeight="semibold" textAlign="center">
+          <Text fontWeight="semibold" fontSize="md" textAlign="center">
             {fullName}
           </Text>
           <Text fontSize="sm" color="gray.500" textAlign="center">

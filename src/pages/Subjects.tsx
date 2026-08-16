@@ -73,13 +73,13 @@ const SubjectCard = ({ subject }: { subject: Subject }) => {
         opacity={subject.is_active ? 1 : 0.5}
         filter={subject.is_active ? undefined : "grayscale(1)"}
       >
-        <Icon size={36} />
-        <Text fontWeight="medium" textAlign="center">
+        <Icon size={36} className="color-teal-outline" />
+        <Text fontWeight="medium" fontSize="lg" textAlign="center">
           {subject.name}
         </Text>
       </Box>
       <Button
-        size="2xs"
+        size="sm"
         variant="outline"
         colorPalette={subject.is_active ? "red" : "green"}
         loading={toggleStatus.isPending}
@@ -130,7 +130,7 @@ const Subjects = () => {
   return (
     <Box m={6}>
       <Flex justify="flex-end" mb={6}>
-        <Button onClick={() => setIsCreateOpen(true)}>
+        <Button className="color-blue-solid" onClick={() => setIsCreateOpen(true)}>
           <Plus size={16} /> Add Subject
         </Button>
         <CreateSubject isOpen={isCreateOpen} onClose={() => setIsCreateOpen(false)} />

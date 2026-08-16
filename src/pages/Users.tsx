@@ -64,25 +64,22 @@ const Users = () => {
 
         <ButtonGroup size="sm" attached>
           <Button
-            variant={statusFilter === "all" ? "solid" : "outline"}
-            borderColor="gray.400"
-            _dark={{ borderColor: "gray.600" }}
+            variant="outline"
+            className={statusFilter === "all" ? "color-blue-solid" : "color-blue-outline"}
             onClick={() => setStatusFilter("all")}
           >
             All
           </Button>
           <Button
-            variant={statusFilter === "active" ? "solid" : "outline"}
-            borderColor="gray.400"
-            _dark={{ borderColor: "gray.600" }}
+            variant="outline"
+            className={statusFilter === "active" ? "color-blue-solid" : "color-blue-outline"}
             onClick={() => setStatusFilter("active")}
           >
             Active
           </Button>
           <Button
-            variant={statusFilter === "inactive" ? "solid" : "outline"}
-            borderColor="gray.400"
-            _dark={{ borderColor: "gray.600" }}
+            variant="outline"
+            className={statusFilter === "inactive" ? "color-blue-solid" : "color-blue-outline"}
             onClick={() => setStatusFilter("inactive")}
           >
             Inactive

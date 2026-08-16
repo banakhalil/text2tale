@@ -75,6 +75,7 @@ const CreateSubject = ({ isOpen, onClose }: Props) => {
               <Button
                 type="submit"
                 form="create-subject-form"
+                className="color-blue-solid"
                 loading={addSubject.isPending}
               >
                 Add

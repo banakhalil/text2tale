@@ -9,24 +9,25 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { BarSegment, Chart, useChart } from "@chakra-ui/charts";
-import { Cell, Pie, PieChart, Tooltip } from "recharts";
+import { Pie, PieChart, Sector, Tooltip } from "recharts";
 import {
   useRatingsStats,
   useStoriesStats,
   useTopUsersStats,
   type SubjectRating,
 } from "@/hooks/useStatistics";
+import { STAR_GRADIENT } from "@/lib/starColors";
 
-const SUBJECT_COLORS = ["#164b9a", "#a5c1e3", "#113d7f", "#5a9ade", "#68affa"];
-const USER_COLORS = ["#009688", "#a0c5c2", "#00585a", "#b2dfdb", "#034041"];
-const RATING_COLORS: Record<string, string> = {
-  "1": "#c0392b",
-  "2": "#e67e22",
-  "3": "#f1c40f",
-  "4": "#7fb069",
-  "5": "#009688",
-};
+const SUBJECT_COLORS = ["#3b82f6", "#c0b3fa", "#14b8a6", "#60a5fa", "#6ee7d8"];
+const USER_COLORS = ["#14b8a6", "#c0b3fa", "#3b82f6", "#6ee7d8", "#a893f0"];
 const RATING_STARS = ["1", "2", "3", "4", "5"] as const;
+const RATING_COLORS: Record<string, string> = {
+  "1": STAR_GRADIENT[0],
+  "2": STAR_GRADIENT[1],
+  "3": STAR_GRADIENT[2],
+  "4": STAR_GRADIENT[3],
+  "5": STAR_GRADIENT[4],
+};
 
 const DONUT_CARD_HEIGHT = "300px";
 const RATINGS_ROW_COUNT_WHILE_LOADING = 3;
@@ -52,21 +53,34 @@ const DonutCard = ({
       borderRadius="2xl"
       height={DONUT_CARD_HEIGHT}
     >
-      <Text fontWeight="semibold" fontSize="xl" mb={6}>
+      <Text
+        fontWeight="medium"
+        fontSize="xl"
+        color="gray.700"
+        _dark={{ color: "gray.300" }}
+        mb={6}
+      >
         {title}
       </Text>
-      <HStack gap={12} align="flex-start">
-        <Box position="relative" width="150px" height="150px" flexShrink={0}>
+      <Grid templateColumns="150px 1fr" gap={36} alignItems="flex-start">
+        <Box
+          position="relative"
+          width="150px"
+          height="150px"
+          marginLeft={10}
+          marginTop={4}
+        >
           <Chart.Root boxSize="150px" chart={chart} bg="transparent">
-            <PieChart style={{ backgroundColor: "transparent" }}>
+            <PieChart responsive style={{ backgroundColor: "transparent" }}>
               <Tooltip
                 cursor={false}
                 animationDuration={100}
                 content={<Chart.Tooltip hideLabel />}
+                wrapperStyle={{ zIndex: 20 }}
               />
               <Pie
-                innerRadius={55}
-                outerRadius={70}
+                innerRadius={75}
+                outerRadius={90}
                 isAnimationActive
                 data={chart.data}
                 dataKey={chart.key("value")}
@@ -74,11 +88,10 @@ const DonutCard = ({
                 cornerRadius={4}
                 label={false}
                 stroke="none"
-              >
-                {chart.data.map((item) => (
-                  <Cell key={item.name} fill={item.color} />
-                ))}
-              </Pie>
+                shape={(props: any) => (
+                  <Sector {...props} fill={chart.color(props.payload!.color)} />
+                )}
+              />
             </PieChart>
           </Chart.Root>
           <Box
@@ -87,6 +100,8 @@ const DonutCard = ({
             left="50%"
             transform="translate(-50%, -50%)"
             textAlign="center"
+            zIndex={1}
+            pointerEvents="none"
           >
             <Text fontSize="xl" fontWeight="bold">
               {total}
@@ -96,9 +111,9 @@ const DonutCard = ({
             </Text>
           </Box>
         </Box>
-        <Box flex="1">
+        <Box marginTop={6}>
           {chart.data.map((item) => (
-            <HStack key={item.name} mb={2} gap={3}>
+            <HStack key={item.name} mb={2} gap={2}>
               <Box
                 w="12px"
                 h="12px"
@@ -107,19 +122,21 @@ const DonutCard = ({
                 flexShrink={0}
               />
               <Text
-                fontSize="sm"
-                fontWeight="medium"
+                fontSize="md"
+                fontWeight="normal"
+                color="gray.700"
+                _dark={{ color: "gray.300" }}
                 textTransform="capitalize"
               >
                 {item.name}
               </Text>
-              <Text fontSize="sm" fontWeight="bold" ml="auto">
+              <Text fontSize="sm" fontWeight="bold">
                 {item.value}
               </Text>
             </HStack>
           ))}
         </Box>
-      </HStack>
+      </Grid>
     </Box>
   );
 };
@@ -236,7 +253,13 @@ const Statistics = () => {
         display="flex"
         flexDirection="column"
       >
-        <Text fontWeight="semibold" fontSize="xl" mb={6}>
+        <Text
+          fontWeight="medium"
+          fontSize="xl"
+          color="gray.700"
+          _dark={{ color: "gray.300" }}
+          mb={4}
+        >
           Ratings by Subject
         </Text>
         <Box flex="1">

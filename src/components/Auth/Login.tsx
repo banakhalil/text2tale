@@ -206,7 +206,7 @@ export const Login = () => {
 
               <Button
                 type="submit"
-                className="font-oswald"
+                className="font-oswald color-blue-solid"
                 w="full"
                 loading={isLoading}
                 my={4}

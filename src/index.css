@@ -24,32 +24,113 @@ body {
   flex-direction: column;
 }
 
-/* Sidebar theme */
+/* Sidebar theme — flat blue, lavender for selected, teal for hover */
 .sidebar-color {
-  background-color: #164b9a;
+  background-color: #2563eb;
 }
 :root[class~="dark"] .sidebar-color {
-  background-color: #113d7f;
+  background-color: #1d4ed8;
 }
 
 .sidebar-selected-item {
-  background-color: #68affab7;
+  background-color: #c0b3fa;
 }
 :root[class~="dark"] .sidebar-selected-item {
-  background-color: #438fe5ae;
+  background-color: #c0b3fa;
+}
+.sidebar-text-color.sidebar-selected-item {
+  color: #2e2350;
 }
 
 .sidebar-not-selected-item:hover {
-  background-color: #bedbff;
-  color: #000000;
+  background-color: #14b8a6;
 }
 :root[class~="dark"] .sidebar-not-selected-item:hover {
-  background-color: #a5c1e3;
-  color: #000000;
+  background-color: #14b8a6;
 }
 
 .sidebar-text-color {
-  color: rgb(239, 236, 236);
+  color: rgb(255, 255, 255);
+}
+
+/* Theme accent colors — edit these to preview different palettes */
+.color-blue-solid {
+  background-color: #3b82f6;
+  color: #ffffff;
+}
+:root[class~="dark"] .color-blue-solid {
+  background-color: #3b82f6;
+}
+.color-blue-solid:hover {
+  background-color: #2f6fe0;
+}
+.color-blue-solid:active {
+  background-color: #1d4ed8;
+}
+
+.color-blue-outline {
+  color: #3b82f6;
+  border-color: #3b82f6;
+}
+:root[class~="dark"] .color-blue-outline {
+  color: #3b82f6;
+  border-color: #3b82f6;
+}
+.color-blue-outline:hover {
+  background-color: rgba(59, 130, 246, 0.12);
+}
+:root[class~="dark"] .color-blue-outline:hover {
+  background-color: rgba(59, 130, 246, 0.2);
+}
+.color-blue-outline:active {
+  background-color: rgba(59, 130, 246, 0.22);
+}
+:root[class~="dark"] .color-blue-outline:active {
+  background-color: rgba(59, 130, 246, 0.3);
+}
+
+.color-lavender-solid {
+  background-color: #c0b3fa;
+  color: #2e2350;
+}
+:root[class~="dark"] .color-lavender-solid {
+  background-color: #c0b3fa;
+  color: #2e2350;
+}
+.color-lavender-outline {
+  color: #6d4fd6;
+  border-color: #6d4fd6;
+}
+:root[class~="dark"] .color-lavender-outline {
+  color: #c0b3fa;
+  border-color: #c0b3fa;
+}
+
+.color-teal-solid {
+  background-color: #14b8a6;
+  color: #ffffff;
+}
+:root[class~="dark"] .color-teal-solid {
+  background-color: #0ea192;
+}
+.color-teal-outline {
+  color: #14b8a6;
+  border-color: #14b8a6;
+}
+:root[class~="dark"] .color-teal-outline {
+  color: #6ee7d8;
+  border-color: #6ee7d8;
+}
+
+.color-teal-subtle {
+  background-color: rgba(20, 184, 166, 0.14);
+  color: #0f8c7e;
+  border-color: transparent;
+}
+:root[class~="dark"] .color-teal-subtle {
+  background-color: rgba(110, 231, 216, 0.16);
+  color: #6ee7d8;
+  border-color: transparent;
 }
 
 /* Content panels */
@@ -82,6 +163,11 @@ background-color: rgb(255, 254, 254);
 .drawer {
   scrollbar-width: thin;
   scrollbar-color: #888 transparent;
+  /* scrollbar-color: #fff0b5 transparent;
+  scrollbar-color: #fde68a transparent;
+  scrollbar-color: #ffe561 transparent;
+  scrollbar-color: #fbdb3a transparent;
+  scrollbar-color: #faca1c transparent; */
 }
 
 /* Hide default password reveal button */
