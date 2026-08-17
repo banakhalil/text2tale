@@ -27,12 +27,19 @@ interface StoriesResponse {
   };
 }
 
-export const useStories = () => {
+export const useStories = (page: number) => {
   return useQuery({
-    queryKey: ["stories"],
+    queryKey: ["stories", page],
     queryFn: async () => {
-      const response = await axiosInstance.get<StoriesResponse>("/stories/");
-      return response.data.results.lessons;
+      const response = await axiosInstance.get<StoriesResponse>("/stories/", {
+        params: { page },
+      });
+      return {
+        lessons: response.data.results.lessons,
+        count: response.data.count,
+        hasNext: response.data.next !== null,
+        hasPrevious: response.data.previous !== null,
+      };
     },
   });
 };

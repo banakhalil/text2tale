@@ -19,7 +19,7 @@ const UserCard = ({ user, onClick }: Props) => {
       borderWidth={2}
       borderColor="transparent"
       transition="all 0.2s ease"
-      _hover={{ borderColor: "#3b82f6", transform: "translateY(-1px)", shadow: "lg" }}
+      _hover={{ borderColor: "#1944a0", transform: "translateY(-1px)", shadow: "lg" }}
       onClick={onClick}
     >
       {user.is_active ? (

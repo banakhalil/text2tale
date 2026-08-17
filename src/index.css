@@ -26,75 +26,81 @@ body {
 
 /* Sidebar theme — flat blue, lavender for selected, teal for hover */
 .sidebar-color {
-  background-color: #2563eb;
+  /* background-color: #2563eb; */
+  background-color: #1944a0;
 }
 :root[class~="dark"] .sidebar-color {
-  background-color: #1d4ed8;
+  /* background-color: #1d4ed8; */
+  background-color: #153987;
 }
 
 .sidebar-selected-item {
-  background-color: #c0b3fa;
+  /* background-color: #c0b3fa; */
+  background-color: #c3b8f8;
 }
 :root[class~="dark"] .sidebar-selected-item {
-  background-color: #c0b3fa;
+  /* background-color: #c0b3fa; */
+  background-color: #aea2e2;
 }
 .sidebar-text-color.sidebar-selected-item {
   color: #2e2350;
 }
 
 .sidebar-not-selected-item:hover {
-  background-color: #14b8a6;
+  /* background-color: #14b8a6; */
+  background-color: #2cbbaa;
 }
 :root[class~="dark"] .sidebar-not-selected-item:hover {
-  background-color: #14b8a6;
+  /* background-color: #14b8a6; */
+  background-color: #2aad9e;
 }
 
 .sidebar-text-color {
   color: rgb(255, 255, 255);
 }
 
-/* Theme accent colors — edit these to preview different palettes */
+/* Theme accent colors — synced to the sidebar's blue/lavender/teal */
 .color-blue-solid {
-  background-color: #3b82f6;
+  background-color: #1944a0;
   color: #ffffff;
 }
 :root[class~="dark"] .color-blue-solid {
-  background-color: #3b82f6;
+  background-color: #153987;
 }
 .color-blue-solid:hover {
-  background-color: #2f6fe0;
+  background-color: #153a87;
 }
 .color-blue-solid:active {
-  background-color: #1d4ed8;
+  background-color: #102a63;
 }
 
 .color-blue-outline {
-  color: #3b82f6;
-  border-color: #3b82f6;
+  color: #1944a0;
+  border-color: #1944a0;
 }
 :root[class~="dark"] .color-blue-outline {
-  color: #3b82f6;
-  border-color: #3b82f6;
+  color: #7ea0e0;
+  border-color: #7ea0e0;
 }
 .color-blue-outline:hover {
-  background-color: rgba(59, 130, 246, 0.12);
+  background-color: rgba(25, 68, 160, 0.12);
 }
 :root[class~="dark"] .color-blue-outline:hover {
-  background-color: rgba(59, 130, 246, 0.2);
+  background-color: rgba(126, 160, 224, 0.2);
 }
 .color-blue-outline:active {
-  background-color: rgba(59, 130, 246, 0.22);
+  background-color: rgba(25, 68, 160, 0.22);
 }
 :root[class~="dark"] .color-blue-outline:active {
-  background-color: rgba(59, 130, 246, 0.3);
+  background-color: rgba(126, 160, 224, 0.3);
 }
 
 .color-lavender-solid {
-  background-color: #c0b3fa;
+  background-color: #c3b8f8;
   color: #2e2350;
 }
 :root[class~="dark"] .color-lavender-solid {
-  background-color: #c0b3fa;
+  background-color: #aea2e2;
   color: #2e2350;
 }
 .color-lavender-outline {
@@ -102,34 +108,34 @@ body {
   border-color: #6d4fd6;
 }
 :root[class~="dark"] .color-lavender-outline {
-  color: #c0b3fa;
-  border-color: #c0b3fa;
+  color: #aea2e2;
+  border-color: #aea2e2;
 }
 
 .color-teal-solid {
-  background-color: #14b8a6;
+  background-color: #2cbbaa;
   color: #ffffff;
 }
 :root[class~="dark"] .color-teal-solid {
-  background-color: #0ea192;
+  background-color: #2aad9e;
 }
 .color-teal-outline {
-  color: #14b8a6;
-  border-color: #14b8a6;
+  color: #2cbbaa;
+  border-color: #2cbbaa;
 }
 :root[class~="dark"] .color-teal-outline {
-  color: #6ee7d8;
-  border-color: #6ee7d8;
+  color: #7fdccd;
+  border-color: #7fdccd;
 }
 
 .color-teal-subtle {
-  background-color: rgba(20, 184, 166, 0.14);
-  color: #0f8c7e;
+  background-color: rgba(44, 187, 170, 0.14);
+  color: #1f8577;
   border-color: transparent;
 }
 :root[class~="dark"] .color-teal-subtle {
-  background-color: rgba(110, 231, 216, 0.16);
-  color: #6ee7d8;
+  background-color: rgba(127, 220, 205, 0.16);
+  color: #7fdccd;
   border-color: transparent;
 }
 

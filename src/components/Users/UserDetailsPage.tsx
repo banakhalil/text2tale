@@ -136,7 +136,7 @@ const UserDetailsPage = ({ user, onBack }: Props) => {
 
       <HStack justify="space-between" mb={4}>
         <Text fontWeight="semibold" fontSize="lg">
-          Lessons
+          Lessons ({details?.lessons.length ?? 0})
         </Text>
         <Menu.Root onSelect={(d) => setSubjectId(d.value)}>
           <Menu.Trigger asChild>

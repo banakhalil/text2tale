@@ -18,8 +18,8 @@ import {
 } from "@/hooks/useStatistics";
 import { STAR_GRADIENT } from "@/lib/starColors";
 
-const SUBJECT_COLORS = ["#3b82f6", "#c0b3fa", "#14b8a6", "#60a5fa", "#6ee7d8"];
-const USER_COLORS = ["#14b8a6", "#c0b3fa", "#3b82f6", "#6ee7d8", "#a893f0"];
+const SUBJECT_COLORS = ["#1944a0", "#c3b8f8", "#2cbbaa", "#7ea0e0", "#7fdccd"];
+const USER_COLORS = ["#2cbbaa", "#c3b8f8", "#1944a0", "#7fdccd", "#aea2e2"];
 const RATING_STARS = ["1", "2", "3", "4", "5"] as const;
 const RATING_COLORS: Record<string, string> = {
   "1": STAR_GRADIENT[0],
