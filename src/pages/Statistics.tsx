@@ -112,8 +112,8 @@ const DonutCard = ({
           </Box>
         </Box>
         <Box marginTop={6}>
-          {chart.data.map((item) => (
-            <HStack key={item.name} mb={2} gap={2}>
+          {chart.data.map((item, index) => (
+            <HStack key={`${item.name}-${index}`} mb={2} gap={2}>
               <Box
                 w="12px"
                 h="12px"
@@ -168,7 +168,7 @@ const DonutCardSkeleton = ({ title }: { title: string }) => (
 
 const SubjectRatingBar = ({ subject }: { subject: SubjectRating }) => {
   const data = RATING_STARS.map((star) => ({
-    name: `${star} star`,
+    name: "★".repeat(Number(star)),
     value: subject.ratings[star] ?? 0,
     color: RATING_COLORS[star],
   }));
@@ -181,7 +181,35 @@ const SubjectRatingBar = ({ subject }: { subject: SubjectRating }) => {
       </Text>
       <BarSegment.Root chart={chart}>
         <BarSegment.Content>
-          <BarSegment.Bar tooltip animation="ease-in" animationDuration="1s" />
+          <BarSegment.Bar
+            animation="ease-in"
+            animationDuration="1s"
+            tooltip={({ payload }: { payload: { name: string; value: number; color: string } }) => {
+              if (chart.highlightedSeries !== payload.name) return null;
+              return (
+                <HStack
+                  position="absolute"
+                  top="-4"
+                  right="4"
+                  bg="bg.panel"
+                  textStyle="xs"
+                  zIndex={1}
+                  px="2.5"
+                  py="1"
+                  gap="1.5"
+                  rounded="l2"
+                  shadow="md"
+                >
+                  <Text color={payload.color} fontWeight="bold">
+                    {payload.name}
+                  </Text>
+                  <Text fontFamily="mono" fontWeight="medium">
+                    {payload.value}
+                  </Text>
+                </HStack>
+              );
+            }}
+          />
         </BarSegment.Content>
       </BarSegment.Root>
     </Box>

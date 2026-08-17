@@ -25,32 +25,29 @@ const SubjectCard = ({ subject }: { subject: Subject }) => {
 
   const handleToggle = () => {
     const nextStatus = !subject.is_active;
-    toggleStatus.mutate(
-      { id: subject.id, isActive: nextStatus },
-      {
-        onSuccess: () => {
-          toaster.create({
-            title: nextStatus ? "Subject enabled" : "Subject disabled",
-            type: "success",
-            duration: 3000,
-            closable: true,
-          });
-        },
-        onError: (error) => {
-          toaster.create({
-            title: "Error",
-            description:
-              error instanceof AxiosError
-                ? (error.response?.data?.message ??
-                  `Failed to ${nextStatus ? "enable" : "disable"} subject`)
-                : `Failed to ${nextStatus ? "enable" : "disable"} subject`,
-            type: "error",
-            duration: 5000,
-            closable: true,
-          });
-        },
+    toggleStatus.mutate(subject.id, {
+      onSuccess: () => {
+        toaster.create({
+          title: nextStatus ? "Subject enabled" : "Subject disabled",
+          type: "success",
+          duration: 3000,
+          closable: true,
+        });
       },
-    );
+      onError: (error) => {
+        toaster.create({
+          title: "Error",
+          description:
+            error instanceof AxiosError
+              ? (error.response?.data?.message ??
+                `Failed to ${nextStatus ? "enable" : "disable"} subject`)
+              : `Failed to ${nextStatus ? "enable" : "disable"} subject`,
+          type: "error",
+          duration: 5000,
+          closable: true,
+        });
+      },
+    });
   };
 
   return (
