@@ -23,18 +23,23 @@ interface UsersResponse {
   };
 }
 
-export const useUsers = (search: string, isActive?: boolean) => {
+export const useUsers = (search: string, isActive?: boolean, page = 1) => {
   return useQuery({
-    queryKey: ["users", search, isActive],
+    queryKey: ["users", search, isActive, page],
     queryFn: async () => {
-      const params: Record<string, string> = {};
+      const params: Record<string, string> = { page_size: "12", page: String(page) };
       if (search) params.first_name = search;
       if (isActive !== undefined) params.is_active = String(isActive);
 
       const response = await axiosInstance.get<UsersResponse>("/users/all/", {
         params,
       });
-      return response.data.results;
+      return {
+        ...response.data.results,
+        count: response.data.count,
+        hasNext: response.data.next !== null,
+        hasPrevious: response.data.previous !== null,
+      };
     },
   });
 };

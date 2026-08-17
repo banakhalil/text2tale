@@ -175,7 +175,7 @@ const SubjectRatingBar = ({ subject }: { subject: SubjectRating }) => {
   const chart = useChart({ data });
 
   return (
-    <Box mb={5}>
+    <Box>
       <Text fontWeight="medium" mb={2} textTransform="capitalize">
         {subject.name} ({subject.total_stories} stories)
       </Text>
@@ -217,7 +217,7 @@ const SubjectRatingBar = ({ subject }: { subject: SubjectRating }) => {
 };
 
 const SubjectRatingBarSkeleton = () => (
-  <Box mb={5}>
+  <Box>
     <SkeletonText noOfLines={1} width="30%" mb={2} />
     <Skeleton height="24px" width="100%" borderRadius="md" />
   </Box>
@@ -290,7 +290,7 @@ const Statistics = () => {
         >
           Ratings by Subject
         </Text>
-        <Box flex="1">
+        <Grid templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }} gap={5} flex="1">
           {ratingsLoading
             ? Array.from({ length: RATINGS_ROW_COUNT_WHILE_LOADING }).map(
                 (_, i) => <SubjectRatingBarSkeleton key={i} />,
@@ -298,7 +298,7 @@ const Statistics = () => {
             : (subjectRatings ?? []).map((subject) => (
                 <SubjectRatingBar key={subject.name} subject={subject} />
               ))}
-        </Box>
+        </Grid>
         <HStack gap={4} mt="auto" pt={4}>
           {RATING_STARS.map((star) => (
             <HStack key={star} gap={2}>
